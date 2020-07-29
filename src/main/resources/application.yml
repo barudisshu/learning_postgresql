@@ -1,0 +1,14 @@
+server:
+  port: 9324
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: app
+    password: p@ssw0rd
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: public
+
+mybatis:
+  type-aliases-package: info.galudisu.entity
+  mapper-locations: classpath:mapping/*.xml
