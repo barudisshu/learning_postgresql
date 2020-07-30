@@ -43,6 +43,6 @@ create table mark
 (
     m_id uuid default uuid_generate_v4() primary key,
     score integer
-)
+);
 
-insert into mark(score) value (1),(2),(3);
+insert into mark(score) values (1),(2),(3);

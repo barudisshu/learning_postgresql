@@ -5,7 +5,7 @@ Learning PostgreSQL
 
 ## 实例版本
 
-postgersql 10
+postgersql 12
 
 ## 安装
 
