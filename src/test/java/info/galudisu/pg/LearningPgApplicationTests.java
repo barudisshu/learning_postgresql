@@ -8,4 +8,9 @@ class LearningPgApplicationTests {
 
   @Test
   void contextLoads() {}
+
+  @Test
+  public void applicationContextTest() {
+    LearningPgApplication.main(new String[] {});
+  }
 }
