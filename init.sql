@@ -34,3 +34,15 @@ values (1451, 'CS301', 5),
        (1556, 'CS301', 5),
        (1451, 'CS305', 5),
        (1432, 'CS305', 4);
+
+
+-- uuid
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+create table mark
+(
+    m_id uuid default uuid_generate_v4() primary key,
+    score integer
+)
+
+insert into mark(score) value (1),(2),(3);
