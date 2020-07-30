@@ -6,9 +6,10 @@ services:
   - postgresql
 
 env:
-  - PGDATABASE=appdb
-  - PGUSER=app
-  - PGPASS='p@ssw0rd'
+  global:
+    - PGDATABASE=appdb
+    - PGUSER=app
+    - PGPASS='p@ssw0rd'
 
 before_install:
   - psql -c "CREATE USER $PGUSER WITH PASSWORD $PGPASS ;" -U postgres
