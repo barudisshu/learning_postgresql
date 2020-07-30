@@ -1,5 +1,7 @@
 package info.galudisu.pg.integration;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import info.galudisu.pg.entity.Student;
 import info.galudisu.pg.service.IStudentService;
 import org.junit.jupiter.api.DisplayName;
@@ -25,5 +27,15 @@ public class StudentTest {
   void testSelect() {
     List<Student> studentList = studentService.list();
     assertThat(studentList).hasSize(3);
+  }
+
+  @DisplayName("_02_: student page")
+  @Test
+  void testPage() {
+    Page<Student> page = new Page<>();
+    page.setPages(0);
+    page.setSize(2);
+    IPage<Student> studentPage = studentService.selectStudentPage(page, 2015);
+    assertThat(studentPage.getRecords()).hasSize(1);
   }
 }
