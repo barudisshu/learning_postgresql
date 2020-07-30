@@ -37,7 +37,7 @@ values (1451, 'CS301', 5),
 
 
 -- uuid
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 create table mark
 (

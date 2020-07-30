@@ -12,6 +12,7 @@ before_install:
   - chmod +x mvnw
 
 before_script:
+  - psql -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" -U app appdb
   - PASSWORD='p@ssw0rd' psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO app ;" -U app appdb
   - PASSWORD='p@ssw0rd' psql --dbname=appdb --file=init.sql -U app appdb
 
