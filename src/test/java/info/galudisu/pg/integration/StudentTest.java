@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(value = {SpringExtension.class})
 @SpringBootTest
+@DisplayName("Student service test")
 public class StudentTest {
 
   @Autowired private IStudentService studentService;
