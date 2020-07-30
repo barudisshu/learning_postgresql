@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(value = {SpringExtension.class})
 @SpringBootTest
-@DisplayName("SERVICE: _01 MarkService")
+@DisplayName("SERVICE: _04 MarkService")
 public class MarkTest {
 
   @Autowired private IMarkService markService;
