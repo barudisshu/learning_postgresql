@@ -33,3 +33,27 @@ psql
 ```shell script
 # create database appdb;
 ```
+
+5. 创建用户
+
+```shell script
+# create user app with password 'p@ssw0rd';
+```
+
+6. 授权连接
+
+```shell script
+# grant connect on database appdb to app;
+```
+
+7. 切换用户
+
+```shell script
+su - app
+```
+
+8. 授权
+
+```shell script
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO app ;
+```
