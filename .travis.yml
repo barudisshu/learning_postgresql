@@ -14,12 +14,10 @@ env:
 before_install:
   - psql -c "CREATE USER $PGUSER WITH PASSWORD $PGPASS ;" -U postgres
   - psql -c "CREATE DATABASE $PGDATABASE owner $PGUSER ;" -U postgres
-  - chmod +x mvnw
-
-before_script:
   - PASSWORD=$PGPASS psql -c "GRANT CONNECT ON DATABASE $PGDATABASE TO $PGUSER ;" -U $PGUSER
   - PASSWORD=$PGPASS psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $PGUSER ;" -U $PGUSER
   - PASSWORD=$PGPASS psql --dbname=$PGDATABASE --file=init.sql -U $PGUSER
+  - chmod +x mvnw
 
 script:
   - mvn clean test jacoco:report
