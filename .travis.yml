@@ -1,6 +1,4 @@
 os: linux
-dist: bionic
-
 language: java
 jdk:
   - openjdk8
@@ -8,25 +6,8 @@ jdk:
 services:
   - postgresql
 
-addons:
-  chrome: stable
-  postgresql: '12'
-  apt:
-    packages:
-      - postgresql-12
-      - postgresql-client-12
-      - postgresql-server-dev-12
-
-
 before_install:
   - chmod +x mvnw
-  - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
-  - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
-  - unzip chromedriver_linux64.zip -d ~/bin
-  - sudo pg_dropcluster --stop 12 main
-  - sudo pg_upgradecluster 11 main
-  - sudo pg_ctlcluster 12 main restart
-  - sudo pg_dropcluster 11 main
 
 before_script:
   - psql -c "CREATE USER app WITH PASSWORD 'p@ssw0rd' ;" -U postgres
