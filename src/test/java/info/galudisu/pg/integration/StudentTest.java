@@ -38,4 +38,16 @@ public class StudentTest {
     IPage<Student> studentPage = studentService.selectStudentPage(page, 2015);
     assertThat(studentPage.getRecords()).hasSize(1);
   }
+
+  @DisplayName("_02_: student field")
+  @Test
+  void testField() {
+    Student student = studentService.getById(1451);
+    assertThat(student).isNotNull();
+    assertThat(student).isNotEqualTo(null);
+    assertThat(student.hashCode()).isNotEqualTo(0);
+    assertThat(student.getSId()).isEqualTo(1451);
+    assertThat(student.getName()).isEqualTo("Anna");
+    assertThat(student.getStartYear()).isEqualTo(2014);
+  }
 }

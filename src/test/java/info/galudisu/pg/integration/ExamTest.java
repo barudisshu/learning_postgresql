@@ -26,4 +26,16 @@ public class ExamTest {
     List<Exam> examList = examService.list();
     assertThat(examList).hasSize(4);
   }
+
+  @DisplayName("_02_: exam field")
+  @Test
+  void testField() {
+    Exam exam = examService.getById(1556);
+    assertThat(exam).isNotNull();
+    assertThat(exam).isNotEqualTo(null);
+    assertThat(exam.hashCode()).isNotEqualTo(0);
+    assertThat(exam.getSId()).isEqualTo(1556);
+    assertThat(exam.getCNo()).isEqualTo("CS301");
+    assertThat(exam.getScore()).isEqualTo(5);
+  }
 }

@@ -26,4 +26,16 @@ public class CourseTest {
     List<Course> courseList = courseService.list();
     assertThat(courseList).hasSize(2);
   }
+
+  @DisplayName("_02_: course field")
+  @Test
+  void testField() {
+    Course course = courseService.getById("CS301");
+    assertThat(course).isNotNull();
+    assertThat(course).isNotEqualTo(null);
+    assertThat(course.hashCode()).isNotEqualTo(0);
+    assertThat(course.getCNo()).isEqualTo("CS301");
+    assertThat(course.getHours()).isEqualTo(30);
+    assertThat(course.getTitle()).isEqualTo("Databases");
+  }
 }

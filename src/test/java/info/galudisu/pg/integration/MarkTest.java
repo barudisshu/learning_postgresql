@@ -25,6 +25,9 @@ public class MarkTest {
   void testSelect() {
     List<Mark> markList = markService.list();
     assertThat(markList).hasSize(3);
-
+    assertThat(markList.get(0)).isNotNull();
+    assertThat(markList.get(0)).isNotEqualTo(null);
+    assertThat(markList.get(0).hashCode()).isNotEqualTo(0);
+    assertThat(markList.get(0).getScore()).isNotEqualTo(0);
   }
 }
