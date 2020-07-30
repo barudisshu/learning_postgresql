@@ -12,3 +12,7 @@ spring:
 mybatis:
   type-aliases-package: info.galudisu.entity
   mapper-locations: classpath:mapping/*.xml
+
+mybatis-plus:
+  global-config:
+    banner: false
