@@ -8,10 +8,10 @@ services:
 before_install:
   - psql -c "CREATE USER app WITH PASSWORD 'p@ssw0rd' ;" -U postgres
   - psql -c "CREATE DATABASE appdb owner app ;" -U postgres
+  - psql -c "GRANT CONNECT ON DATABASE appdb TO app ;" -U postgres
   - chmod +x mvnw
 
 before_script:
-  - PASSWORD='p@ssw0rd' psql -c "GRANT CONNECT ON DATABASE appdb TO app ;" -U app
   - PASSWORD='p@ssw0rd' psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO app ;" -U app
   - PASSWORD='p@ssw0rd' psql --dbname=appdb --file=init.sql -U app
 
