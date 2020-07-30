@@ -13,8 +13,8 @@ before_script:
   - psql -c "CREATE USER app WITH PASSWORD 'p@ssw0rd' ;" -U postgres
   - psql -c "CREATE DATABASE appdb owner app ;" -U postgres
   - psql -c "GRANT CONNECT ON DATABASE appdb TO app ;" -U postgres
+  - psql --dbname=appdb --file=init.sql -U postgres appdb
   - PASSWORD='p@ssw0rd' psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO app ;" -U app appdb
-  - PASSWORD='p@ssw0rd' psql --dbname=appdb --file=init.sql -U app appdb
 
 script:
   - mvn clean test jacoco:report
