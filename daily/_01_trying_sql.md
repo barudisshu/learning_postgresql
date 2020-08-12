@@ -13,7 +13,7 @@ $ sudo -u postgres psql
 
 对于windows操作系统，选择如下shell界面进入。
 
-[!gui_shell](/images/windows_gui_shell.png)
+[gui_shell](/images/windows_gui_shell.png)
 
 注意的是，windows的终端会出现中文乱码，可以设置TrueType 字体方便操作。
 
