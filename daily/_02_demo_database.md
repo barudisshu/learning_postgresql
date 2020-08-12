@@ -27,7 +27,7 @@ postgres# \i demo-small-en-20170815.sql
 
 下面是一份航空公司的数据库ER图。
 
-[airport](/images/air_flights_er.png)
+![airport](/images/air_flights_er.png)
 
 ### Bookings
 
