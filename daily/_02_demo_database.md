@@ -25,3 +25,34 @@ postgres# \i demo-small-en-20170815.sql
 
 ### General Information
 
+下面是一份航空公司的数据库ER图。
+
+[!airport](/images/air_flights_er.png)
+
+### Bookings
+
+### Tickets
+
+### Flight Segments
+
+### Flights
+
+## Installation
+
+### Installation from the Website
+
+## Sample Queries
+
+### A Couple of Words about the Schema
+
+### Simple Queries
+
+### Aggregate Functions
+
+### Window Functions
+
+### Arrays
+
+### Recursive Queries
+
+### Functions and Extensions
