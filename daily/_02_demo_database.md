@@ -231,7 +231,7 @@ bookings.now()::date - INTERVAL '2 day'
 AND bp.seat_no = '1A';
 ```
 
-**Problem**. How many seats remained free on flight PG0404 yesterday?
+**Problem**. How many seats remained free on flight PG0404 yesterday?(昨天航班PG0404剩余多少空位？)
 
 **Solution**. There are several approaches to solving this problem. The first one uses the NOT EXISTS clause to find the seats without the corresponding boarding passes:
 
