@@ -237,16 +237,16 @@ CS305 | Networks | 60
 
 ```shell script
 test=# SELECT * FROM courses, exams;
-c_no | title | hours | s_id | c_no | score
--------+-------------+-------+------+-------+-------
-CS301 | Databases | 30 | 1451 | CS301 | 5
-CS305 | Networks | 60 | 1451 | CS301 | 5
-CS301 | Databases | 30 | 1556 | CS301 | 5
-CS305 | Networks | 60 | 1556 | CS301 | 5
-CS301 | Databases | 30 | 1451 | CS305 | 5
-CS305 | Networks | 60 | 1451 | CS305 | 5
-CS301 | Databases | 30 | 1432 | CS305 | 4
-CS305 | Networks | 60 | 1432 | CS305 | 4
+ c_no  |   title   | hours | s_id | c_no  | score
+-------+-----------+-------+------+-------+-------
+ CS301 | Databases |    30 | 1451 | CS301 |     5
+ CS305 | Networks  |    60 | 1451 | CS301 |     5
+ CS301 | Databases |    30 | 1556 | CS301 |     5
+ CS305 | Networks  |    60 | 1556 | CS301 |     5
+ CS301 | Databases |    30 | 1451 | CS305 |     5
+ CS305 | Networks  |    60 | 1451 | CS305 |     5
+ CS301 | Databases |    30 | 1432 | CS305 |     4
+ CS305 | Networks  |    60 | 1432 | CS305 |     4
 (8 rows)
 ```
 
@@ -259,13 +259,14 @@ CS305 | Networks | 60 | 1432 | CS305 | 4
 test=# SELECT courses.title, exams.s_id, exams.score
 FROM courses, exams
 WHERE courses.c_no = exams.c_no;
-title | s_id | score
--------------+------+-------
-Databases | 1451 | 5
-Databases | 1556 | 5
-Networks | 1451 | 5
-Networks | 1432 | 4
+   title   | s_id | score
+-----------+------+-------
+ Databases | 1451 |     5
+ Databases | 1556 |     5
+ Networks  | 1451 |     5
+ Networks  | 1432 |     4
 (4 rows)
+
 ```
 
 虽然结果查出来的，但是不够优雅，例如我们希望查询所有学生关于"Networks"课程的记录：
@@ -277,10 +278,10 @@ FROM students
 JOIN exams
 ON students.s_id = exams.s_id
 AND exams.c_no = 'CS305';
-name | score
+  name  | score
 --------+-------
-Anna | 5
-Victor | 4
+ Anna   |     5
+ Victor |     4
 (2 rows)
 ```
 
@@ -294,12 +295,13 @@ FROM students
 LEFT JOIN exams
 ON students.s_id = exams.s_id
 AND exams.c_no = 'CS305';
-name | score
+  name  | score
 --------+-------
-Anna | 5
-Victor | 4
-Nina |
+ Anna   |     5
+ Victor |     4
+ Nina   |
 (3 rows)
+
 ```
 
 `WHERE`条件语句作用于结果处理上。因此，如果指定了约束提交，Nina会被过滤掉：
@@ -309,11 +311,12 @@ test=# SELECT students.name, exams.score
 FROM students
 LEFT JOIN exams ON students.s_id = exams.s_id
 WHERE exams.c_no = 'CS305';
-name | score
+  name  | score
 --------+-------
-Anna | 5
-Victor | 4
+ Anna   |     5
+ Victor |     4
 (2 rows)
+
 ```
 
 postgres对于联表查询做了优化处理。因此不要在应用层级上做联合处理，让数据库做这个工作。
@@ -329,12 +332,13 @@ FROM exams
 WHERE exams.s_id = students.s_id
 AND exams.c_no = 'CS305')
 FROM students;
-name | score
+  name  | score
 --------+-------
-Anna | 5
-Victor | 4
-Nina |
+ Anna   |     5
+ Victor |     4
+ Nina   |
 (3 rows)
+
 ```
 
 包含NULL值的子语句，结果将被过滤掉：
@@ -345,10 +349,11 @@ FROM exams
 WHERE (SELECT start_year
 FROM students
 WHERE students.s_id = exams.s_id) > 2014;
-s_id | c_no | score
+ s_id | c_no  | score
 ------+-------+-------
-1556 | CS301 | 5
+ 1556 | CS301 |     5
 (1 row)
+
 ```
 
 子查询语句内也可以添加条件语句。
@@ -359,11 +364,12 @@ FROM students
 WHERE s_id IN (SELECT s_id
 FROM exams
 WHERE c_no = 'CS305');
-name | start_year
+  name  | start_year
 --------+------------
-Anna | 2014
-Victor | 2014
+ Anna   |       2014
+ Victor |       2014
 (2 rows)
+
 ```
 
 或者取相反的结果值。
@@ -390,11 +396,12 @@ WHERE NOT EXISTS (SELECT s_id
 FROM exams
 WHERE exams.s_id = students.s_id
 AND score < 5);
-name | start_year
+ name | start_year
 ------+------------
-Anna | 2014
-Nina | 2015
+ Anna |       2014
+ Nina |       2015
 (2 rows)
+
 ```
 
 为了避免表冲突，你可以在子查询语句后使用任意名字代表这个查询结果。
@@ -407,11 +414,12 @@ FROM courses, exams
 WHERE courses.c_no = exams.c_no
 AND courses.title = 'Databases') ce
 ON s.s_id = ce.s_id;
-name | score
+ name | score
 ------+-------
-Anna | 5
-Nina | 5
+ Anna |     5
+ Nina |     5
 (2 rows)
+
 ```
 
 这里的"s"是表的别名，"ce"则是子查询的别名。
@@ -433,13 +441,14 @@ AND s.s_id = e.s_id;
 ```shell script
 test=# SELECT * FROM exams
 ORDER BY score, s_id, c_no DESC;
-s_id | c_no | score
+ s_id | c_no  | score
 ------+-------+-------
-1432 | CS305 | 4
-1451 | CS305 | 5
-1451 | CS301 | 5
-1556 | CS301 | 5
+ 1432 | CS305 |     4
+ 1451 | CS305 |     5
+ 1451 | CS301 |     5
+ 1556 | CS301 |     5
 (4 rows)
+
 ```
 
 ### Grouping Operations
@@ -447,27 +456,27 @@ s_id | c_no | score
 组操作表示将多行结果组合。通常使用聚集函数(aggregate functions)操作。例如，查询考试的总分数。
 
 ```shell script
-test=# SELECT count(*), count(DISTINCT s_id),
-avg(score)
+test=# SELECT count(*), count(DISTINCT s_id), avg(score) 
 FROM exams;
-count | count | avg
+ count | count |        avg
 -------+-------+--------------------
-4 | 3 | 4.7500000000000000
+     4 |     3 | 4.7500000000000000
 (1 row)
+
 ```
 
-或者使用GROUP BY    从句。
+或者使用 `GROUP BY` 从句。
 
 ```shell script
-test=# SELECT c_no, count(*),
-count(DISTINCT s_id), vg(score)
-FROM exams
+test=# SELECT c_no, count(*), count(DISTINCT s_id), avg(score) 
+FROM exams 
 GROUP BY c_no;
-c_no | count | count | avg
+ c_no  | count | count |        avg
 -------+-------+-------+--------------------
-CS301 | 2 | 2 | 5.0000000000000000
-CS305 | 2 | 2 | 4.5000000000000000
+ CS301 |     2 |     2 | 5.0000000000000000
+ CS305 |     2 |     2 | 4.5000000000000000
 (2 rows)
+
 ```
 
 GROUP BY 从句后还可以跟 HAVING 子句进行条件过来。例如，查询学生分数不低于5分的学科数不少于1科的学生名。
@@ -527,14 +536,15 @@ ALTER TABLE
 
 ```shell script
 test=# \d students
-Table "public.students"
-Column | Type | Modifiers
-------------+---------+----------
-s_id | integer | not null
-name | text |
-start_year | integer |
-g_no | text |
+                Table "public.students"
+   Column   |  Type   | Collation | Nullable | Default
+------------+---------+-----------+----------+---------
+ s_id       | integer |           | not null |
+ name       | text    |           |          |
+ start_year | integer |           |          |
+ g_no       | text    |           |          |
 ...
+
 ```
 
 现在，我们创建一个组"A-101"。将所有学生移进该组，并另Anna作为组长。
@@ -585,12 +595,13 @@ UPDATE 3
 
 ```shell script
 test=# SELECT * FROM students;
-s_id | name | start_year | g_no
-------+--------+------------+------
-1451 | Anna | 2014 |
-1432 | Victor | 2014 |
-1556 | Nina | 2015 |
+ s_id |  name  | start_year | g_no
+------+--------+------------+-------
+ 1451 | Anna   |       2014 | 
+ 1432 | Victor |       2014 | 
+ 1556 | Nina   |       2015 | 
 (3 rows)
+
 ```
 
 因为事务还没有提交。
@@ -606,17 +617,19 @@ COMMIT
 
 ```shell script
 test=# SELECT * FROM groups;
-g_no | monitor
+ g_no  | monitor
 -------+---------
-A-101 | 1451
+ A-101 |    1451
 (1 row)
+
 test=# SELECT * FROM students;
-s_id | name | start_year | g_no
+ s_id |  name  | start_year | g_no
 ------+--------+------------+-------
-1451 | Anna | 2014 | A-101
-1432 | Victor | 2014 | A-101
-1556 | Nina | 2015 | A-101
+ 1451 | Anna   |       2014 | A-101
+ 1432 | Victor |       2014 | A-101
+ 1556 | Nina   |       2015 | A-101
 (3 rows)
+
 ```
 
 ### Useful psql Commands
