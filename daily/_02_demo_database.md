@@ -196,13 +196,13 @@ You are now connected to database "demo" as user
 ```bash
 demo=# SELECT airport_code, city
 FROM airports LIMIT 5;
-airport_code | city
+ airport_code |           city           
 --------------+--------------------------
-YKS | ßêóòñê
-MJZ | Ìèðíûé
-KHV | Õàáàðîâñê
-PKC | Ïåòðîïàâëîâñê-Êàì÷àòñêèé
-UUS | Þæíî-Ñàõàëèíñê
+ YKS          | Якутск
+ MJZ          | Мирный
+ KHV          | Хабаровск
+ PKC          | Петропавловск-Камчатский
+ UUS          | Южно-Сахалинск
 (5 rows)
 ```
 
